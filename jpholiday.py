@@ -141,29 +141,25 @@ def _get(y, m, d, w):
 
 def get_shun_bun(y):
   add = 0.242194 * (y - 1980) - math.floor((y - 1980) / 4)
-  if 1980 <= y:
-    if 2100 <= y <= 2150:
-      return math.floor(21.8510 + add)
-    else:
-      return math.floor(20.8431 + add)
+  if 2100 <= y <= 2150:
+    return math.floor(21.8510 + add)
+  elif 1980 <= y:
+    return math.floor(20.8431 + add)
+  elif 1900 <= y:
+    return math.floor(20.8357 + add)
   elif 1851 <= y:
-    if 1900 <= y:
-      return math.floor(20.8357 + add)
-    else:
-      return math.floor(19.8277 + add)
+    return math.floor(19.8277 + add)
   return 0
 
 
 def get_shuu_bun(y):
   add = 0.242194 * (y - 1980) - math.floor((y - 1980) / 4)
-  if 1980 <= y:
-    if 2100 <= y <= 2150:
-      return math.floor(24.2488 + add)
-    else:
-      return math.floor(23.2488 + add)
+  if 2100 <= y <= 2150:
+    return math.floor(24.2488 + add)
+  elif 1980 <= y:
+    return math.floor(23.2488 + add)
+  elif 1900 <= y:
+    return math.floor(23.2588 + add)
   elif 1851 <= y:
-    if 1900 <= y:
-      return math.floor(23.2588 + add)
-    else:
-      return math.floor(22.2588 + add)
+    return math.floor(22.2588 + add)
   return 0
