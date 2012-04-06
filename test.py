@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import time
 import sys
 import datetime
 import jpholiday
@@ -3173,6 +3174,9 @@ def test():
   start = datetime.date(1948, 7, 20)
   end = datetime.date(2150, 12, 31)
   delta = datetime.timedelta(days=1)
+  
+  t1 = time.time()
+  
   day = start
   while day <= end:
     name = jpholiday.get(day)
@@ -3181,7 +3185,8 @@ def test():
       target = unicode(target, 'utf-8')
     assert name == target, (day, name, target)
     day += delta
-  print 'ok'
+  
+  print time.time() - t1
 
 
 if __name__ == '__main__':

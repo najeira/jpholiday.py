@@ -23,10 +23,14 @@ def get(day):
   name = _get(y, m, d, w)
   
   #振替休日
-  if not name and 1973 <= y and w == 0:
-    yesterday = day - datetime.timedelta(days=1)
-    yname = _get(yesterday.year, yesterday.month, yesterday.day, yesterday.weekday())
-    if yname:
+  if not name:
+    if 1973 <= y and w == 0:
+      yesterday = day - datetime.timedelta(days=1)
+      yname = _get(yesterday.year, yesterday.month, yesterday.day, yesterday.weekday())
+      if yname:
+        name = '振替休日'
+    elif m == 5 and d == 6 and 2007 <= y and w in (1, 2):
+      #祝日が連続する場合に月曜日以外で振替休日となる可能性がある
       name = '振替休日'
   
   if name and sys.version_info[0] < 3:
@@ -87,10 +91,6 @@ def _get(y, m, d, w):
         return 'みどりの日'
     elif d == 5:
       return 'こどもの日'
-    elif d == 6:
-      #祝日が連続する場合に月曜日以外で振替休日となる可能性がある
-      if 2007 <= y and w in (1, 2):
-        return '振替休日'
     
   elif m == 7:
     if 1996 <= y <= 2002:
@@ -140,32 +140,30 @@ def _get(y, m, d, w):
 
 
 def get_shun_bun(y):
-  tmp = 0
   add = 0.242194 * (y - 1980) - math.floor((y - 1980) / 4)
   if 1980 <= y:
     if 2100 <= y <= 2150:
-      tmp = math.floor(21.8510 + add)
+      return math.floor(21.8510 + add)
     else:
-      tmp = math.floor(20.8431 + add)
+      return math.floor(20.8431 + add)
   elif 1851 <= y:
     if 1900 <= y:
-      tmp = math.floor(20.8357 + add)
+      return math.floor(20.8357 + add)
     else:
-      tmp = math.floor(19.8277 + add)
-  return tmp
+      return math.floor(19.8277 + add)
+  return 0
 
 
 def get_shuu_bun(y):
-  tmp = 0
   add = 0.242194 * (y - 1980) - math.floor((y - 1980) / 4)
   if 1980 <= y:
     if 2100 <= y <= 2150:
-      tmp = math.floor(24.2488 + add)
+      return math.floor(24.2488 + add)
     else:
-      tmp = math.floor(23.2488 + add)
+      return math.floor(23.2488 + add)
   elif 1851 <= y:
     if 1900 <= y:
-      tmp = math.floor(23.2588 + add)
+      return math.floor(23.2588 + add)
     else:
-      tmp = math.floor(22.2588 + add)
-  return tmp
+      return math.floor(22.2588 + add)
+  return 0
