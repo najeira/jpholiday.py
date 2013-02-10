@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-jpholyday.py
+jpholiday.py
 ============
 
 :copyright: 2012 by najeira <najeira@gmail.com>.
@@ -85,7 +85,7 @@ def _get(y, m, d, w):
     if d == 3:
       return '憲法記念日'
     elif d == 4:
-      if 1988 <= y <= 2006 and w in (1, 2, 3, 4, 5):
+      if 1988 <= y <= 2006 and 1 <= w <= 5:
         return '国民の休日'
       elif 2007 <= y:
         return 'みどりの日'
@@ -109,7 +109,7 @@ def _get(y, m, d, w):
         return '敬老の日'
     
     if 2009 <= y and w == 1:
-      if 22 <= (d + 1) <= 24:
+      if 21 <= d <= 23:
         if (d + 1) == get_shuu_bun(y):
           return '国民の休日'
     
